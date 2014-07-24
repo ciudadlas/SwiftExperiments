@@ -10,5 +10,8 @@ http://www.techworld.com.au/slideshow/547259/pictures-10-prominent-features-stol
 Swift FAQ
 http://www.raywenderlich.com/74138/swift-language-faq
 
+Quick Start
+http://www.raywenderlich.com/74438/swift-tutorial-a-quick-start
+
 A Simple iOS App
 http://www.raywenderlich.com/74904/swift-tutorial-part-2-simple-ios-app
