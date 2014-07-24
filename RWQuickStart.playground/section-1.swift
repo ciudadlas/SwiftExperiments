@@ -115,5 +115,7 @@ let tipCalc = TipCalculator(total: 33.25, taxPct: 0.06)
 //tipCalc.printPossibleTipsWithArray()
 tipCalc.returnPossibleTips()
 
+// Note: You cannot call code from your app that resides in a Playground file. Playground files are just for testing and prototyping code; if you want to use code from a Playground in your app, you have to move it to a Swift file like you’re doing here.
+
 
 
