@@ -58,4 +58,10 @@ class TipCalculatorModel {
         
         return retVal;
     }
+    
+    func calcTipWithTipPctTuple(tipPct: Double) -> (tipAmt: Double, totalAmt: Double) {
+        let tipAmt = subtotal * tipPct
+        let finalTotal = total + tipAmt
+        return (tipAmt, finalTotal)
+    }
 }
