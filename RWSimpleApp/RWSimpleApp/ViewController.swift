@@ -8,18 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
     
 //    You’re prefixing these variables with the @IBOutlet keyword. Interface Builder scans your code looking for any properties in your view controller prefixed with this keyword. It exposes any properties it discovers so you can connect them to views.
 //    You’re marking the variables with an exclamation mark (!). This indicates the variables are optional values, but they are implicitly unwrapped. This is a fancy way of saying you can write code assuming that they are set, and your app will crash if they are not set.
     
 //    Implicitly unwrapped optionals are a convenient way to create variables you know for sure will be set up before you use them (like user interface elements created in the Storyboard), so you don’t have to unwrap the optionals every time you want to use them.
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet var totalTextField: UITextField!
     @IBOutlet var taxPctSlider: UISlider!
     @IBOutlet var taxPctLabel: UILabel!
     @IBOutlet var resultsTextView: UITextView!
     let tipCalc = TipCalculatorModel(total: 33.25, taxPct: 0.06)
+    
+    var possibleTips = Dictionary<Int, (tipAmt:Double, total:Double)>()
+    var sortedKeys:[Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,15 +62,9 @@ class ViewController: UIViewController {
         
         
         tipCalc.total = Double(totalTextField.text.bridgeToObjectiveC().doubleValue)
-        
-        let possibleTips = tipCalc.returnPossibleTips()
-        var results = ""
-        
-        for (tipPct, tipValue) in possibleTips {
-            results += "\(tipPct)% \(tipValue)\n"
-        }
-        
-        resultsTextView.text = results
+        possibleTips = tipCalc.returnPossibleTipsTuple()
+        sortedKeys = sorted(Array(possibleTips.keys))
+        tableView.reloadData()
     }
     
     @IBAction func taxPercentageChanged(sender: AnyObject) {
@@ -82,8 +80,23 @@ class ViewController: UIViewController {
         totalTextField.text = String(format: "%0.2f", tipCalc.total)
         taxPctSlider.value = Float(tipCalc.taxPct) * 100.0
         taxPctLabel.text = "Tax Percentage (\(Int(taxPctSlider.value)))%:"
-        resultsTextView.text = ""
     }
-
+    
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return sortedKeys.count
+    }
+    
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        let cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: nil)
+        
+        let tipPct = sortedKeys[indexPath.row]
+        
+        let tipAmt = possibleTips[tipPct]!.tipAmt
+        let total = possibleTips[tipPct]!.total
+        
+        cell.textLabel.text = "\(tipPct)"
+        cell.detailTextLabel.text = String(format:"Tip: $%0.2f, Total: $%0.2f", tipAmt, total)
+        return cell
+    }
 }
 
