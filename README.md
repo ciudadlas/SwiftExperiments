@@ -19,3 +19,14 @@ http://www.raywenderlich.com/74904/swift-tutorial-part-2-simple-ios-app
 WR - Part 3
 http://www.raywenderlich.com/75289/swift-tutorial-part-3-tuples-protocols-delegates-table-views
 
+WR - Swift Language Highlights
+http://www.raywenderlich.com/73997/swift-language-highlights
+
+WR - Intro to Swift, Video 0
+http://www.raywenderlich.com/74514/video-tutorial-introduction-swift-part-0-introduction
+
+WR - Swift Cheat Sheet
+http://www.raywenderlich.com/73967/swift-cheat-sheet-and-quick-reference
+
+
+
